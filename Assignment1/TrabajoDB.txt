@@ -1,0 +1,57 @@
+/* -----------------------------------------------------------------------------
+TABRAJO DE TABLESPACES, ROLES Y PROFILES
+ADMINISTRACION DE BASE DE DATOS AVANZADA
+NOMBRES: ANDRES ALBANES
+         ANDRES ARISTIZABAL
+         LINA CASTAÑEDA
+ -----------------------------------------------------------------------------*/
+
+--============================================================================--
+--1. Create 2 Tablespaces: one with 1 Gb and 2 datafiles, tablespace should be 
+--named " vehicles_fleet "and the other one with the name " test_purposes " with
+--500 Mb and 1 datafile. (0.5)
+--============================================================================--
+--VER LA RUTA DE LOS DATAFILES
+SELECT * FROM DBA_DATA_FILES;
+
+--CREAR LOS TABLESPACE
+CREATE TABLESPACE vehicles_fleet DATAFILE 
+'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\vehicles_fleet1.dbf' SIZE 500M,
+'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\vehicles_fleet2.dbf' SIZE 1M
+AUTOEXTEND ON NEXT 500k MAXSIZE 1000M 
+EXTENT MANAGEMENT LOCAL 
+SEGMENT SPACE MANAGEMENT AUTO ONLINE;
+
+CREATE TABLESPACE test_purposes DATAFILE 
+'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\test_purposes1.dbf' SIZE 500M,
+'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\test_purposes2.dbf' SIZE 1M
+AUTOEXTEND ON NEXT 500k MAXSIZE 2000M 
+EXTENT MANAGEMENT LOCAL 
+SEGMENT SPACE MANAGEMENT AUTO ONLINE;
+   
+--============================================================================--
+--2. Create an Undo tablespace with 5Mb of space and 1 datafile (0.5)
+--============================================================================--
+--CREAR EL TABLESPACE
+CREATE TABLESPACE developers DATAFILE 
+'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\developers.dbf' SIZE 5M
+AUTOEXTEND ON NEXT 500k MAXSIZE 5M 
+EXTENT MANAGEMENT LOCAL 
+SEGMENT SPACE MANAGEMENT AUTO ONLINE;
+
+--BORRAR EL TABLESPACE
+DROP TABLESPACE developers;
+   
+--============================================================================--
+--3. Set the undo tablespace to be used in the system (0.5)
+--============================================================================--
+CREATE UNDO TABLESPACE developers
+DATAFILE 'C:\ORACLE\ORADATA\DBLANGUAGES\DATAFILE\developers.dbf' SIZE 5M  
+REUSE AUTOEXTEND ON;
+     
+--============================================================================--
+--4. Create a DBA user and assign it to the tablespace called " vehicles_fleet " 
+--,this user has unlimited space on the tablespace (0.5)
+--============================================================================--
+CREATE USER AdminUser IDENTIFIED BY "AdminUser23" 
+DEFAULT TABLESPACE vehicles_fleet QUOTA UNLIMITED ON vehicles_fleet
