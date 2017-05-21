@@ -1,7 +1,6 @@
 1. Normalize and attach entity relationship diagram (imagen, git) (1.0)
 
-URLGITHUB:
-
+URLGITHUB: https://github.com/andres240688/Assignments/blob/master/Assignment2/entidad%20relacion%20punto%201.jpg
 
 ========================================================================================================
 2. Create tables with its columns according to your normalization. Create sequences for every primary
@@ -635,7 +634,29 @@ the name already exist in the service table for that vehicle, must return an emp
 need to calculate the number based on the current mileage, for instance, if the mileage of the car is
 11560 miles the name should return "9000_service". (0.5)
 
+CREATE OR REPLACE FUNCTION FunCreateNameService(VehicleId IN number)
+RETURN VARCHAR IS
+   response VARCHAR(200) := '';
+   mileage VARCHAR(200) := '';
+   exist NUMBER(1) := 0;
+BEGIN
+    SELECT TRUNC(MileageVehicle/3000)*3000 INTO mileage 
+    FROM Vehicles WHERE IdVehicle = VehicleId;
+    
+    SELECT COUNT(*) INTO exist FROM Services WHERE NameService = (mileage||'_service');
+    
+    IF exist >= 1
+    THEN
+      DBMS_OUTPUT.put_line('Response empty');
+      RETURN response;
+    END IF;
+    
+    SELECT mileage || '_service' INTO response FROM DUAL;
+    
+    RETURN response;
+END;  
 
+SELECT FunCreateNameService(1) FROM DUAL;
 
 ================================================================================================
 6. Create a stored procedure which accepts the id of vehicle as argument, inside the procedure you
