@@ -668,11 +668,12 @@ mileage '9123'". If the string is empty do nothing.
 c. Associate all the types of services to the service, for each type of service the status column
 must have the value "Pending". (0.5)
 
-
+url: https://github.com/AndresGaviria/Assignments
 
 ================================================================================================
 7. Create a trigger which once the mileage column is updated, call the procedure just created. (0.5)
 
+url: https://github.com/AndresGaviria/Assignments
 
 ================================================================================================
 8. Create a stored procedure to decrease the current value of vehicles as follows:
@@ -683,4 +684,5 @@ c. Otherwise 5% of the current value.
 d. Only "manager_profile " is allowed to run the procedure and should print at the end "Number of
 vehicles updated successfully: xx" (0.5)
 
+url: https://github.com/AndresGaviria/Assignments
 ================================================================================================
