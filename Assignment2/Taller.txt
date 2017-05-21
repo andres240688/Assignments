@@ -581,7 +581,7 @@ SELECT * FROM InsuranceClaims;
 3. Create a backup trough postman and take a screenshot of the list of backups in the console. Add the
 image to git. (0.5)
 
-URL GITHUB:
+URL GITHUB: https://github.com/andres240688/Assignments/blob/master/Assignment2/backup_punto3.pdf
 
 ================================================================================================
 4. Create a view which should be run only by users associated to "finance_profile ". The view should look
